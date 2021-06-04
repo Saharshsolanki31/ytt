@@ -47,7 +47,8 @@ bot = Bot(
 # Login The Bot 
 bot.login(username=Credential.my_username, password=Credential.my_password,force=True)
 
-
+mid = bot.get_user_id_from_username("saharsh_solanki_")
+bot.send_messages("Hii This Bot worked", [mid])
 
 #Asking User To Input Username Of The Instagram User To Get His Followers 
 insta_username = "faizu2407" #input("\n \n Enter Instagram Username : ")
