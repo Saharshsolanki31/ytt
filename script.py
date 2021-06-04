@@ -50,7 +50,7 @@ bot.login(username=Credential.my_username, password=Credential.my_password,force
 
 
 #Asking User To Input Username Of The Instagram User To Get His Followers 
-insta_username = input("\n \n Enter Instagram Username : ")
+insta_username = "faizu2407" #input("\n \n Enter Instagram Username : ")
 
 # Getting Follower Using Isnta Bot 
 followers=bot.get_user_followers(insta_username)
@@ -80,7 +80,7 @@ for user_id in followers:
                 print("\n \t Liked The Post")
                 print("\n \n \t \t Waiting For Some Seconds")
                 time.sleep(randint(2,6))
-                cmt = ["Jabardast 🔥🔥🔥🔥","The Perfect Click !! Awesome 🔥🔥🔥🔥 ","Amazing Post 🔥🔥🔥🔥 ","Jabardast 🔥🔥🔥🔥","Supper 🔥🔥🔥🔥","Jhakas  🔥🔥🔥🔥"]
+                cmt = ["Jabardast ","The Perfect Click !! Awesome ","Amazing Post  ","Jabardast","Supper ","Jhakas "]
                 bot.comment(medias[i],cmt[randint(0,5)])
                 print("\n \t Commented On  The Post")
                 time.sleep(randint(2,6))
