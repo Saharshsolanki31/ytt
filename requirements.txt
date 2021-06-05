@@ -1,2 +1,2 @@
 ﻿instabot==0.117.0
- requests==2.25.0
+requests==2.25.0
