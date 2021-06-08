@@ -1,93 +1,82 @@
-import Credential
+import telebot
+import time
+import requests
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 
-from instabot import Bot
+Bot_Token = "1702684382:AAFUZxoAdNy6TItR5gknWpgj3mj0bLYtvS8"
 
-import os
-
-import time 
-
-from random import * 
-
-
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+bot = telebot.TeleBot(Bot_Token, parse_mode=None) # You can set parse_mode by default. HTML or MARKDOWN
 
 
-if os.path.isfile(Credential.path+"config/"+Credential.my_username+"_uuid_and_cookie.json"):
-    os.remove(Credential.path+"config/"+Credential.my_username+"_uuid_and_cookie.json")
+user_dict = {}
 
 
-bot = Bot(
-    filter_users=True,
-    filter_private_users=True,
-    filter_previously_followed=True,
-    filter_business_accounts=True,
-    filter_verified_accounts=True,
-    max_likes_per_day=200000,
-    max_follows_per_day = 10000,
-    max_comments_per_day = 20000,
-    min_likes_to_like=0,
-    max_likes_to_like=400,
-    like_delay=3,
-    min_followers_to_follow = 10000 ,
-    min_following_to_follow =10000,
-    follow_delay=35,
-    comment_delay=20,
-    )
+class User:
+    def __init__(self, mobile_number):
+        self.mobile_number = mobile_number
+        self.count = None
 
 
-# Login The Bot 
-bot.login(username=Credential.my_username, password=Credential.my_password,force=True)
+@bot.message_handler(commands=['start','help'])
+def send_welcome(message):
+    text_to_send= "Wel-Come To Unlimited SMS-Sending Bot !! \n \n This Bot Is Automatically Sending unlimited Number Of Sms No Need To Active On Bot \n \n Just Enter The Victime Number : "
+    bot.register_next_step_handler(bot.send_message(message.chat.id , text_to_send), process_mobile_number_step)
 
-mid = bot.get_user_id_from_username("saharsh_solanki_")
-bot.send_messages("Hii This Bot worked", [mid])
 
-#Asking User To Input Username Of The Instagram User To Get His Followers 
-insta_username = "faizu2407" #input("\n \n Enter Instagram Username : ")
-
-# Getting Follower Using Isnta Bot 
-followers=bot.get_user_followers(insta_username)
-
-msg = "Hello Your Profile Is Amazing !! You Are Looking Very Cool !! support me to reach 100k my dream  i makes a reels video hope you guys like it please share like comment follow me and support me Here Is The Link  :-- \n  https://instagram.com/attitudeloverr_143"
-
-for user_id in followers:  
-    user_info = bot.get_user_info(user_id)
-    if user_info["is_private"] == True:
-        bot.follow(user_id)
-        print("Followed The User")
-        print("\n \n \t \t Waiting For Some Seconds")
-        time.sleep(randint(2,6))
-        bot.send_messages(msg, [user_id])
-    else:
-        bot.follow(user_id)
-        print("Followed The User")
-        print("\n \n \t \t Waiting For Some Seconds")
-        time.sleep(randint(2,6))
-        bot.send_messages(msg, [user_id])
-        print("This Is A Public Account ")
-        medias=bot.get_user_medias(user_id)
-        if len(medias) > 3 :
-            time.sleep(randint(2,6))
-            for i in range(2):
-                bot.like(medias[i])
-                print("\n \t Liked The Post")
-                print("\n \n \t \t Waiting For Some Seconds")
-                time.sleep(randint(2,6))
-                cmt = ["Jabardast ","The Perfect Click !! Awesome ","Amazing Post  ","Jabardast","Supper ","Jhakas "]
-                bot.comment(medias[i],cmt[randint(0,5)])
-                print("\n \t Commented On  The Post")
-                time.sleep(randint(2,6))
+def process_mobile_number_step(message):
+    try:
+        chat_id = message.chat.id
+        mobile_number = message.text
+        if len(mobile_number) ==10:
+            user = User(mobile_number)
+            user_dict[chat_id] = user
+            msg = bot.reply_to(message, 'How SMS You Want To Send ? \n \n Note That :- If You Enter 5 Will Send 100 SMS And Then Wait For 5 Minute After 5 Minutes AGain We Will Send 100 SMS Then Again Wait For 5 Minute This Proccess Will Run 5 Time As You Have Entered 5 So 5*500 OTP Will Be Send  !! \n \n If You Want To Test Just Put 2 ')
+            bot.register_next_step_handler(msg, process_count_step)
         else:
-            print("\t \t This User Have No Media Skiiping This !!")
-        
-        time.sleep(randint(2,6))
+            ms=bot.send_message(chat_id, "Please Enter A Valid 10 Digit Mobile Number")
+            bot.register_next_step_handler(ms, process_mobile_number_step)
+    except Exception as e:
+        bot.reply_to(message, 'oooops')
 
-print("Task Completed")
+
+
+def process_count_step(message):
+    try:
+        chat_id = message.chat.id
+        count = message.text
+        user = user_dict[chat_id]
+        user.count = count
+        ms=bot.send_message(chat_id, 'We Will Start Sending SMS To : ' + user.mobile_number + '\n Count:' + str(user.count)+"\n \n Type 'YES' To Continue Or 'NO' Exit")
+        bot.register_next_step_handler(ms, process_sms_step)
+    except Exception as e:
+        bot.reply_to(message,'oooops')
+
+def process_sms_step(message):
+    chat_id = message.chat.id
+    check = message.text
+    if check == "YES":
+        user = user_dict[chat_id]
+        browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe")  # Creating Object Of Chrome  && executable_path=r"C:\path\to\chromedriver.exe"
+        no_otp = 100
+        time.sleep(10)
+        for i in range(1,int(user.count)+1):
+            browser.get("https://mytoolstown.com/smsbomber/")
+            mobile_number_input = browser.find_element_by_css_selector("input[id='mobno']").send_keys(user.mobile_number)
+            time.sleep(3)
+            count_input = browser.find_element_by_css_selector("input[id='count']").send_keys(no_otp)
+            count_input = browser.find_element(By.XPATH,"//*[@id='sendsms']/div[3]/div/div/div[3]/label").click()
+            time.sleep(3)
+            submit_button = browser.find_element_by_xpath("//*[@id='startsms']").click()
+            time.sleep(120)
+            browser.refresh()
+            bot.send_message(chat_id,"Sended OTP 100*"+str(i)+"="+str(i*100)+"Times Now Waiting For 5-10 Minutes")
+            time.sleep(300)
+        browser.close()
+        bot.send_message(chat_id,"Proccess IS Completed !!")
+    else:
+        bot.send_message(chat_id,"Canceled The Proccess")
+
+bot.polling()
