@@ -64,8 +64,7 @@ def process_sms_step(message):
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--no-sandbox")
-        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
-        browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe")  # Creating Object Of Chrome  && executable_path=r"C:\path\to\chromedriver.exe"
+        browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)  # Creating Object Of Chrome  && executable_path=r"C:\path\to\chromedriver.exe"
         no_otp = 100
         time.sleep(10)
         for i in range(1,int(user.count)+1):
@@ -75,6 +74,8 @@ def process_sms_step(message):
             count_input = browser.find_element_by_css_selector("input[id='count']").send_keys(no_otp)
             count_input = browser.find_element(By.XPATH,"//*[@id='sendsms']/div[3]/div/div/div[3]/label").click()
             time.sleep(3)
+            
+            
             submit_button = browser.find_element_by_xpath("//*[@id='startsms']").click()
             time.sleep(120)
             browser.refresh()
