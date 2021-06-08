@@ -1,2 +1,4 @@
 ﻿instabot==0.117.0
 requests==2.25.0
+pyTelegramBotAPI==3.7.9
+selenium==3.141.0
