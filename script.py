@@ -81,7 +81,7 @@ def process_insta_step(message):
     check = message.text
     if check == "YES":
         user = user_dict[chat_id]
-        msgs=bot.send_message(chat_id, " Task : Trying To Login !!")
+        msgs=bot.send_message(chat_id, " Task : Loading Browser !!")
         try:
             chrome_options = webdriver.ChromeOptions()
             chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -92,22 +92,26 @@ def process_insta_step(message):
             # browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe")
         except:
             bot.send_message(chat_id,"Task Failed : I Got An error While Loading Browerser")
-            browser.close()
+            # browser.close()
             exit()
 
         # try:
+        bot.edit_message_text(chat_id=chat_id, text="Task : Browser Loaded Trying To Login", message_id=msgs.message_id)
         browser.get("https://www.instagram.com/")
         time.sleep(10)
         username_input = browser.find_element_by_xpath("//*[@id='loginForm']/div/div[1]/div/label/input").send_keys(user.username)
         password_input = browser.find_element_by_xpath("//*[@id='loginForm']/div/div[2]/div/label/input").send_keys(user.password)
+        bot.edit_message_text(chat_id=chat_id, text="Entered Login Details", message_id=msgs.message_id)
         time.sleep(3)
         login_button_input = browser.find_element(By.XPATH,"//*[@id='loginForm']/div/div[3]/button").click()
+        bot.edit_message_text(chat_id=chat_id, text="Clicked On Login Button", message_id=msgs.message_id)
         time.sleep(13)
         not_now_button = browser.find_element_by_xpath("//*[@id='react-root']/section/main/div/div/div/div/button").click()
         time.sleep(13)
         off_notifi_button = browser.find_element_by_xpath("/html/body/div[4]/div/div/div/div[3]/button[2]").click()
         time.sleep(10)
         bot.edit_message_text(chat_id=chat_id, text="Login Successfully \n \n Task Following User", message_id=msgs.message_id)
+        
         # except:
         #     bot.edit_message_text(chat_id=chat_id, text="TaskIncorrect Details Entered", message_id=msgs.message_id)
         #     browser.close()
