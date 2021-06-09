@@ -100,7 +100,8 @@ def process_insta_step(message):
         browser.get("https://www.instagram.com/")
         time.sleep(20)
         try:
-            username_input = browser.find_element_by_xpath("//*[@id='loginForm']/div/div[1]/div/label/input").send_keys(user.username)
+            logins_button_input = browser.find_element(By.XPATH,"//*[@id='react-root']/section/main/article/div/div/div/div[3]/button[1]").click()
+            username_input = browser.find_element(By.XPATH,"//*[@id='loginForm']/div/div[1]/div/label/input").send_keys(user.username)
             bot.edit_message_text(chat_id=chat_id, text="Entered Username", message_id=msgs.message_id)
             password_input = browser.find_element_by_xpath("//*[@id='loginForm']/div/div[2]/div/label/input").send_keys(user.password)
             bot.edit_message_text(chat_id=chat_id, text="Entered Login Details", message_id=msgs.message_id)
