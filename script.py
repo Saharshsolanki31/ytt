@@ -99,7 +99,11 @@ def process_insta_step(message):
         bot.edit_message_text(chat_id=chat_id, text="Task : Browser Loaded Trying To Login", message_id=msgs.message_id)
         browser.get("https://www.instagram.com/")
         time.sleep(20)
-        logins_button_input = browser.find_element(By.XPATH,"//*[@id='react-root']/section/main/article/div/div/div/div[3]/button[1]").click()
+        try:
+            logins_button_input = browser.find_element(By.XPATH,"//*[@id='react-root']/section/main/article/div/div/div/div[3]/button[1]").click()
+        except Exception as e:
+            bot.edit_message_text(chat_id=chat_id, text="Exception Is : The Doc IS "+str(e.__doc__)+"And The Message Is : "+e.message, message_id=msgs.message_id)
+            
         bot.edit_message_text(chat_id=chat_id, text="Login Button Pe Click Kara ", message_id=msgs.message_id)
         time.sleep(20)
         
