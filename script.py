@@ -83,7 +83,6 @@ def process_insta_step(message):
         user = user_dict[chat_id]
         msgs=bot.send_message(chat_id, " Task : Trying To Login !!")
         try:
-            bot.edit_message_text(chat_id=chat_id, text="seding", message_id=text.message_id)
             chrome_options = webdriver.ChromeOptions()
             chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
             chrome_options.add_argument("--headless")
