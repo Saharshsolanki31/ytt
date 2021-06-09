@@ -83,13 +83,13 @@ def process_insta_step(message):
         user = user_dict[chat_id]
         msgs=bot.send_message(chat_id, " Task : Loading Browser !!")
         try:
-            # chrome_options = webdriver.ChromeOptions()
-            # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-            # chrome_options.add_argument("--headless")
-            # chrome_options.add_argument("--disable-dev-shm-usage")
-            # chrome_options.add_argument("--no-sandbox")
-            # browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
-            browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe")
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+            chrome_options.add_argument("--headless")
+            chrome_options.add_argument("--disable-dev-shm-usage")
+            chrome_options.add_argument("--no-sandbox")
+            browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+#             browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe")
         except:
             bot.send_message(chat_id,"Task Failed : I Got An error While Loading Browerser")
             # browser.close()
