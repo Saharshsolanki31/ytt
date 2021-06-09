@@ -98,7 +98,8 @@ def process_insta_step(message):
         # try:
         bot.edit_message_text(chat_id=chat_id, text="Task : Browser Loaded Trying To Login", message_id=msgs.message_id)
         browser.get("https://www.instagram.com/")
-        time.sleep(10)
+        bot.edit_message_text(chat_id=chat_id, text="Task : Website Loaded ", message_id=msgs.message_id)
+        time.sleep(20)
         username_input = browser.find_element_by_xpath("//*[@id='loginForm']/div/div[1]/div/label/input").send_keys(user.username)
         password_input = browser.find_element_by_xpath("//*[@id='loginForm']/div/div[2]/div/label/input").send_keys(user.password)
         bot.edit_message_text(chat_id=chat_id, text="Entered Login Details", message_id=msgs.message_id)
