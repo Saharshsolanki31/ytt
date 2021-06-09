@@ -83,13 +83,13 @@ def process_insta_step(message):
         user = user_dict[chat_id]
         msgs=bot.send_message(chat_id, " Task : Loading Browser !!")
         try:
-            # chrome_options = webdriver.ChromeOptions()
-            # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-            # chrome_options.add_argument("--headless")
-            # chrome_options.add_argument("--disable-dev-shm-usage")
-            # chrome_options.add_argument("--no-sandbox")
-            # browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
-            browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe")
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+            chrome_options.add_argument("--headless")
+            chrome_options.add_argument("--disable-dev-shm-usage")
+            chrome_options.add_argument("--no-sandbox")
+            browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+#             browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe")
         except:
             bot.send_message(chat_id,"Task Failed : I Got An error While Loading Browerser")
             # browser.close()
@@ -100,8 +100,9 @@ def process_insta_step(message):
         browser.get("https://www.instagram.com/")
         time.sleep(20)
         logins_button_input = browser.find_element(By.XPATH,"//*[@id='react-root']/section/main/article/div/div/div/div[3]/button[1]").click()
-        time.sleep(20)
         bot.edit_message_text(chat_id=chat_id, text="Login Button Pe Click Kara ", message_id=msgs.message_id)
+        time.sleep(20)
+        
         username_input = browser.find_element_by_xpath("//*[@id='loginForm']/div/div[1]/div/label/input").send_keys(user.username)
         bot.edit_message_text(chat_id=chat_id, text="Entered Username", message_id=msgs.message_id)
         password_input = browser.find_element_by_xpath("//*[@id='loginForm']/div/div[2]/div/label/input").send_keys(user.password)
