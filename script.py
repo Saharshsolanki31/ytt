@@ -111,21 +111,21 @@ def process_insta_step(message):
         bot.edit_message_text(chat_id=chat_id, text="Clicked On Login Button", message_id=msgs.message_id)
         time.sleep(13)
         not_now_button = browser.find_element_by_xpath("//*[@id='react-root']/section/main/div/div/div/div/button").click()
-        time.sleep(13)
-        browser.save_screenshot("logo.jpg")
-        time.sleep(15)
-        bot.send_photo(chat_id, photo=open('logo.jpg', 'rb'))
+#         time.sleep(13)
+#         browser.save_screenshot("logo.jpg")
+#         time.sleep(15)
+#         bot.send_photo(chat_id, photo=open('logo.jpg', 'rb'))
         time.sleep(10)
-        off_notifi_button = browser.find_element_by_xpath("/html/body/div[4]/div/div/div/div[3]/button[2]").click()
-        time.sleep(10)
+#         off_notifi_button = browser.find_element_by_xpath("/html/body/div[4]/div/div/div/div[3]/button[2]").click()
+#         time.sleep(10)
         bot.edit_message_text(chat_id=chat_id, text="Login Successfully \n \n Task Following User", message_id=msgs.message_id)
 # #             logins_button_input = browser.find_element(By.XPATH,"//*[@id='react-root']/section/main/article/div/div/div/div[3]/button[1]").click()
 #         except Exception as e:
 #             bot.edit_message_text(chat_id=chat_id, text="Exception Is : "+e, message_id=msgs.message_id)
 #             bot.send_message(chat_id,e)
             
-        bot.edit_message_text(chat_id=chat_id, text="Login Button Pe Click Kara ", message_id=msgs.message_id)
-        time.sleep(20)
+#         bot.edit_message_text(chat_id=chat_id, text="Login Button Pe Click Kara ", message_id=msgs.message_id)
+#         time.sleep(20)
         
         
         
