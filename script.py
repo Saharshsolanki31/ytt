@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from random import randint, random
 import video_list
-
+import requests
 video_lists = ['https://youtu.be/A9L4ouBHSSo','https://youtu.be/AOL_jYPFRO8','https://youtu.be/s8Ul0-pQyso']
 # for i in range(0,10):
 #     x=randint(0,len(video_lists)-1)
