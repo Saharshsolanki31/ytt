@@ -29,8 +29,10 @@ for i in range(0,3000):
     # browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe")
     for i in video_lists:
         browser.get(i)
+        print("Loaded")
         time.sleep(10)
     browser.close()
+    print("New WIndow")
     time.sleep(5)
 
       
