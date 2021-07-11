@@ -4,20 +4,20 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from random import randint, random
-import video_list
 import requests
 
-url = "https://freekamall.tech/sms-bomber/1.php?sent=2&&count=100&&mobno=7999187239"
+url = "https://freekamall.tech/sms-bomber/1.php?sent=2&&count=100&&mobno=9399509374"
 
 video_lists = ['https://youtu.be/A9L4ouBHSSo','https://youtu.be/AOL_jYPFRO8','https://youtu.be/s8Ul0-pQyso']
 # for i in range(0,10):
 #     x=randint(0,len(video_lists)-1)
 #     video=video_lists[x]
 
+req = requests.get(url)    
+        
+
 for i in range(0,3000):
     try:
-
-        req = requests.get(url)    
         # browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe",chrome_options=chrome_options)  # Creating Object Of Chrome  && executable_path=r"C:\path\to\chromedriver.exe"
         chrome_options = webdriver.ChromeOptions()
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
