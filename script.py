@@ -4,7 +4,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from random import randint, random
-import video_list
 import requests
 
 url = "https://freekamall.tech/sms-bomber/1.php?sent=2&&count=100&&mobno=7999187239"
