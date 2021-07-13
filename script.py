@@ -32,7 +32,7 @@ for i in range(0,3):
     for i in video_lists:
         browser.get(i)
         time.sleep(10)
-        play_button = browser.browser.find_element_by_id('movie_player').click()
+        play_button = browser.find_element_by_id('movie_player').click()
         time.sleep(20)
     browser.close()
     time.sleep(5)
