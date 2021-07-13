@@ -31,9 +31,9 @@ for i in range(0,3):
     # browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe")
     for i in video_lists:
         browser.get(i)
-        time.sleep(3)
-        play_button = browser.find_element_by_xpath('//*[@id="movie_player"]/div[26]/div[2]/div[1]/button').click()
         time.sleep(10)
+        play_button = browser.find_element_by_xpath('//*[@id="movie_player"]/div[26]/div[2]/div[1]/button').click()
+        time.sleep(20)
     browser.close()
     time.sleep(5)
 
