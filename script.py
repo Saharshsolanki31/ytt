@@ -14,10 +14,12 @@ video_lists = ['https://youtu.be/A9L4ouBHSSo','https://youtu.be/AOL_jYPFRO8','ht
 #     x=randint(0,len(video_lists)-1)
 #     video=video_lists[x]
 
-req = requests.get(url)    
-        
+# # req = requests.get(url)    
+# browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe")       
+# browser.get('https://youtu.be/AOL_jYPFRO8')
+# play_button = browser.find_element_by_xpath('//*[@id="movie_player"]/div[26]/div[2]/div[1]/button').click()
 
-for i in range(0,3000):
+for i in range(0,3):
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
@@ -29,10 +31,10 @@ for i in range(0,3000):
     # browser = webdriver.Chrome(executable_path=r"C:\Chrome_driver\chromedriver.exe")
     for i in video_lists:
         browser.get(i)
-        print("Loaded")
+        time.sleep(3)
+        play_button = browser.find_element_by_xpath('//*[@id="movie_player"]/div[26]/div[2]/div[1]/button').click()
         time.sleep(10)
     browser.close()
-    print("New WIndow")
     time.sleep(5)
 
       
